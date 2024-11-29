@@ -36,13 +36,13 @@ class SharePointConnector:
                         file.download(temp_file.name).execute_query()
                         
                         # Read file content
-                        with open(temp_file.name, 'rb') as f:
+                        with open(temp_file.name, "r", encoding="utf-8") as f:
                             content = f.read()
                         
                         documents.append({
-                            'name': file_name,
-                            'content': content,
-                            'url': file_url
+                            "name": file_name,
+                            "content": content,
+                            "url": file_url
                         })
                         
                         # Clean up temp file
@@ -67,16 +67,16 @@ class SharePointConnector:
                     file = self.ctx.web.get_file_by_server_relative_url(file_url)
                     file.download(temp_file.name).execute_query()
                     
-                    with open(temp_file.name, 'rb') as f:
+                    with open(temp_file.name, "r", encoding="utf-8") as f:
                         content = f.read()
                     
                     # Clean up temp file
                     os.unlink(temp_file.name)
                     
                     return {
-                        'name': document_name,
-                        'content': content,
-                        'url': file_url
+                        "name": document_name,
+                        "content": content,
+                        "url": file_url
                     }
             
             return None
